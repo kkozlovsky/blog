@@ -28,7 +28,7 @@ import java.util.Properties;
 @EnableJpaRepositories({"ru.kerporation.repository"})
 @EnableTransactionManagement
 @PropertySource({"classpath:application.properties"})
-@ComponentScan({"ru.kerporation.model"})
+@ComponentScan({"ru.kerporation"})
 public class PersistenceConfiguration {
 	private final static Logger log = LoggerFactory.getLogger(PersistenceConfiguration.class);
 

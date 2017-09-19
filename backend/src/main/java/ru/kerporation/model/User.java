@@ -1,13 +1,16 @@
 package ru.kerporation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.EnumSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "unique_email")})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "password"})
 public class User {
 
 	@Id
@@ -28,7 +31,7 @@ public class User {
 
 	@Column(name = "registered", columnDefinition = "timestamp default now()")
 	@NotNull
-	protected Date registered = new Date();
+	private LocalDateTime registered = LocalDateTime.now();
 
 	@Enumerated(EnumType.STRING)
 	@CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
@@ -56,6 +59,13 @@ public class User {
 		this.roles = roles;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getUserId() {
 		return id;
@@ -89,11 +99,11 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public Date getRegistered() {
+	public LocalDateTime getRegistered() {
 		return registered;
 	}
 
-	public void setRegistered(Date registered) {
+	public void setRegistered(LocalDateTime registered) {
 		this.registered = registered;
 	}
 
