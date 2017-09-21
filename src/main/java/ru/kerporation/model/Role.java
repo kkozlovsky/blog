@@ -1,14 +1,36 @@
 package ru.kerporation.model;
 
-//import org.springframework.security.core.GrantedAuthority;
 
-//public enum Role implements GrantedAuthority {
-public enum Role {
-	ROLE_USER,
-	ROLE_ADMIN;
+import org.springframework.security.core.GrantedAuthority;
 
-//	@Override
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "posts")
+public class Role implements GrantedAuthority {
+	
+	private Long userId;
+	private String role;
+
+	@Override
 	public String getAuthority() {
-		return name();
+		return role;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

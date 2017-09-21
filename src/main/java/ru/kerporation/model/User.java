@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.EnumSet;
 import java.util.Set;
 
 @Entity
@@ -19,8 +18,8 @@ public class User {
 	private Integer id;
 
 	@NotNull
-	@Column(name = "email", nullable = false, unique = true)
-	private String email;
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
 
 	@Column(name = "password", nullable = false)
 	protected String password;
@@ -44,16 +43,12 @@ public class User {
 	}
 
 	public User(User u) {
-		this(u.getUserId(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRoles());
+		this(u.getUserId(), u.getUsername(), u.getPassword(), u.isEnabled(), u.getRoles());
 	}
 
-	public User(Integer id, String email, String password, boolean enabled, Role role, Role... roles) {
-		this(id, email, password, enabled, EnumSet.of(role, roles));
-	}
-
-	public User(Integer id, String email, String password, boolean enabled, Set<Role> roles) {
+	public User(Integer id, String username, String password, boolean enabled, Set<Role> roles) {
 		this.id = id;
-		this.email = email;
+		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.roles = roles;
@@ -75,12 +70,12 @@ public class User {
 		this.id = userId;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
