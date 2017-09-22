@@ -1,16 +1,31 @@
 package ru.kerporation.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "user_roles")
 public class Role implements GrantedAuthority {
-	
-	private Long userId;
+
+	@Id
+	@Column(name = "id")
+	@SequenceGenerator(name = "user_role_seq", sequenceName = "user_role_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_role_seq")
+	private Long Id;
+
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
+	private User user;
+
+	@NotEmpty
+	@Column(name = "role")
 	private String role;
 
 	@Override
@@ -18,12 +33,24 @@ public class Role implements GrantedAuthority {
 		return role;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Role() {
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public Role(User user, String role) {
+		this.user = user;
+		this.role = role;
+	}
+
+	public Long getId() {
+		return Id;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getRole() {

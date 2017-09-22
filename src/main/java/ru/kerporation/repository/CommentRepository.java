@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
-	public List<Comment> findAllByUserUsernameOrderByDateDesc(String username);
+	public List<Comment> findAllByUserUsernameOrderByDateCreatedDesc(String username);
 
-	public List<Comment> findAllByPostIdOrderByDateDesc(Integer postId);
+	public List<Comment> findAllByPostIdOrderByDateCreatedDesc(Integer postId);
 }

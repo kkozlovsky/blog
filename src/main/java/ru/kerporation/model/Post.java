@@ -14,7 +14,8 @@ public class Post {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "post_seq", sequenceName = "post_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_seq")
 	private Long id;
 
 	@NotNull
@@ -33,6 +34,7 @@ public class Post {
 	@Column(name = "date_сreated", columnDefinition = "timestamp default now()")
 	private LocalDate dateCreated = LocalDate.now();
 
+	@JsonIgnore
 	@ManyToOne
 	private User creator;
 

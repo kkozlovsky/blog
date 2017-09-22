@@ -14,12 +14,12 @@ public class CommentService {
 	private CommentRepository commentRepository;
 	
 	public List<Comment> findAllByPostIdOrderByDateDesc(Integer postId) {
-		List<Comment> commentList = commentRepository.findAllByPostIdOrderByDateDesc(postId);
+		List<Comment> commentList = commentRepository.findAllByPostIdOrderByDateCreatedDesc(postId);
 		return commentList;
 	}
 	
 	public List<Comment> findAllByUserUsernameOrderByDateDesc(String username) {
-		List<Comment> commentList = commentRepository.findAllByUserUsernameOrderByDateDesc(username);
+		List<Comment> commentList = commentRepository.findAllByUserUsernameOrderByDateCreatedDesc(username);
 		return commentList;
 	}
 	

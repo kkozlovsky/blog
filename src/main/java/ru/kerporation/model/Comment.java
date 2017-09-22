@@ -1,6 +1,7 @@
 package ru.kerporation.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -8,11 +9,13 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "comments")
 public class Comment {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@SequenceGenerator(name = "comment_seq", sequenceName = "comment_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_seq")
 	private Integer id;
 
 	@NotEmpty
@@ -23,10 +26,12 @@ public class Comment {
 	@NotNull
 	private LocalDateTime dateCreated = LocalDateTime.now();
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private Post post;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

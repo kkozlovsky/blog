@@ -1,16 +1,19 @@
 package ru.kerporation.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "unique_email")})
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "username", name = "unique_username")})
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "password"})
-public class User {
+public class User implements UserDetails {
 
 	@Id
 	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
@@ -23,22 +26,27 @@ public class User {
 
 	@Column(name = "password", nullable = false)
 	protected String password;
-	
+
 	@NotNull
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled = true;
 
-	@Column(name = "registered", columnDefinition = "timestamp default now()")
 	@NotNull
+	@Column(name = "registered", columnDefinition = "timestamp default now()")
 	private LocalDateTime registered = LocalDateTime.now();
 
-	@Enumerated(EnumType.STRING)
-	@CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-	@Column(name = "role")
-	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name = "account_non_expired", nullable = false)
+	private boolean accountNonExpired = true;
+
+	@Column(name = "account_non_Locked", nullable = false)
+	private boolean accountNonLocked = true;
+
+	@Column(name = "credentials_non_expired", nullable = false)
+	private boolean credentialsNonExpired = true;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Role> roles;
-
-
+	
 	public User() {
 	}
 
@@ -74,8 +82,28 @@ public class User {
 		return username;
 	}
 
+	@Override
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles;
 	}
 
 	public String getPassword() {
@@ -108,5 +136,17 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
 	}
 }

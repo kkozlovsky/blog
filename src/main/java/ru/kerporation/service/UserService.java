@@ -1,6 +1,9 @@
 package ru.kerporation.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.kerporation.model.User;
 import ru.kerporation.repository.UserRepository;
@@ -8,7 +11,7 @@ import ru.kerporation.repository.UserRepository;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -36,5 +39,10 @@ public class UserService {
 	
 	public void delete(User user) {
 		userRepository.delete(user);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return userRepository.findByUsername(username);
 	}
 }
