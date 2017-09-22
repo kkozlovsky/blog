@@ -33,15 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 
-//	@Bean
-//	public PasswordEncoder bcryptPasswordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
+	@Bean
+	public PasswordEncoder bcryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
-				.userDetailsService(userService);
-//				.passwordEncoder(bcryptPasswordEncoder());
+				.userDetailsService(userService)
+				.passwordEncoder(bcryptPasswordEncoder());
 	}
 }
