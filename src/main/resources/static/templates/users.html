@@ -1,0 +1,19 @@
+<h1>Список пользователй</h1>
+<table class="table table-bordered">
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>Username</th>
+		<th>Enabled</th>
+		<th>Non expired</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="user in users">
+		<td>{{user.id}}</td>
+		<td><a href="users/{{user.username}}">{{user.username}}</a></td>
+		<td>{{user.enabled}}</td>
+		<td>{{user.accountNonExpired}}</td>
+	</tr>
+	</tbody>
+</table>
