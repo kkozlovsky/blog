@@ -16,7 +16,7 @@ public class Post {
 	@Column(name = "id")
 	@SequenceGenerator(name = "post_seq", sequenceName = "post_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_seq")
-	private Long id;
+	private Integer id;
 
 	@NotNull
 	@Column(name = "title", nullable = false) 
@@ -45,11 +45,11 @@ public class Post {
 	public Post() {
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

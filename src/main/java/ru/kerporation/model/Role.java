@@ -16,7 +16,7 @@ public class Role implements GrantedAuthority {
 	@Column(name = "id")
 	@SequenceGenerator(name = "user_role_seq", sequenceName = "user_role_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_role_seq")
-	private Long Id;
+	private Integer Id;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -41,7 +41,7 @@ public class Role implements GrantedAuthority {
 		this.role = role;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return Id;
 	}
 	
