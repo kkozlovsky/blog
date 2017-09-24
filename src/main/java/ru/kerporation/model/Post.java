@@ -34,12 +34,12 @@ public class Post {
 	@Column(name = "date_сreated", columnDefinition = "timestamp default now()")
 	private LocalDate dateCreated = LocalDate.now();
 
-	@JsonIgnore
 	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User creator;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Comment> comments;
 	
 	public Post() {
@@ -91,6 +91,14 @@ public class Post {
 
 	public void setCreator(User creator) {
 		this.creator = creator;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 }
 

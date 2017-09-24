@@ -3,6 +3,9 @@
 	<section>{{post.preview}}</section>
 	<section ng-bind-html="post.htmlContent"></section>
 	<p>{{post.user_id}}</p>
+	
+	<h2>Комментарии</h2>
+	<p ng-repeat="comment in comments">{{comment.content}}</p>
 </article>
 
 <!--<span ng-bind-html='post.content'></span>-->

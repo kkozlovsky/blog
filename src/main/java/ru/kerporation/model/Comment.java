@@ -25,15 +25,15 @@ public class Comment {
 	@Column(name = "date_сreated", columnDefinition = "timestamp default now()")
 	@NotNull
 	private LocalDateTime dateCreated = LocalDateTime.now();
-
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name = "post_id")
+	@JsonIgnore
 	private Post post;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 
 	public Comment() {

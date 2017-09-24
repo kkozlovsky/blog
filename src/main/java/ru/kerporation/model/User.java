@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -46,6 +47,12 @@ public class User implements UserDetails {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Role> roles;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "creator")
+	private List<Post> posts;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<Comment> comments;
 	
 	public User() {
 	}
@@ -148,5 +155,21 @@ public class User implements UserDetails {
 
 	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 }

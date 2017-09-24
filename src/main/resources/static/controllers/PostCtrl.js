@@ -2,6 +2,7 @@ angular.module('myApp')
 	.controller('PostCtrl', ['$scope', 'PostService', '$stateParams', '$sce',	function ($scope, PostService, $stateParams, $sce) {
 
 		$scope.post = {};
+		$scope.comments;
 
 		$scope.id = $stateParams.id;
 
@@ -13,6 +14,7 @@ angular.module('myApp')
 			PostService.getPostById(id).then(function (postResponse) {
 				$scope.post = postResponse;
 				$scope.post.htmlContent = $sce.trustAsHtml(postResponse.content);
+				$scope.comments = postResponse.comments;
 			})
 		};
 
