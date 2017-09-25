@@ -17,14 +17,8 @@
 	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript" src="app.js"></script>
-	<script type="text/javascript" src="controllers/MainCtrl.js"></script>
-	<script type="text/javascript" src="controllers/UsersCtrl.js"></script>
-	<script type="text/javascript" src="controllers/UserCtrl.js"></script>
 	<script type="text/javascript" src="controllers/PostsCtrl.js"></script>
 	<script type="text/javascript" src="controllers/PostCtrl.js"></script>
-
-
-	<script type="text/javascript" src="services/UserService.js"></script>
 	<script type="text/javascript" src="services/PostService.js"></script>
 
 	<base href="/">
@@ -32,24 +26,8 @@
 <body>
 <main>
 	<div class="container">
-		<!-- Navigation -->
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand">Blog</a>
-				</div>
-				<ul class="nav navbar-nav">
-					<li><a class="nav-link" ui-sref="users" >Users</a></li>
-					<li><a class="nav-link" ui-sref="posts" >Posts</a></li>
-				</ul>
-			</div>
-		</nav>
-
-		<!--<a class="nav-link" ui-sref="users" >Users</a>-->
 		<div ui-view></div>
-		
 	</div>
-
 </main>
 </body>
 </html>

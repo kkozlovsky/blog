@@ -1,12 +1,10 @@
 package ru.kerporation.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -34,14 +32,7 @@ public class Post {
 	@Column(name = "date_сreated", columnDefinition = "timestamp default now()")
 	private LocalDate dateCreated = LocalDate.now();
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	@JsonIgnore
-	private User creator;
-
-	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Comment> comments;
-	
+		
 	public Post() {
 	}
 
@@ -84,21 +75,6 @@ public class Post {
 	public void setDateCreated(LocalDate dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-
-	public User getCreator() {
-		return creator;
-	}
-
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+	
 }
 
