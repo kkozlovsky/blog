@@ -32,12 +32,22 @@
 <body>
 <main>
 	<div class="container">
+		<!-- Navigation -->
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand">Blog</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li><a class="nav-link" ui-sref="users" >Users</a></li>
+					<li><a class="nav-link" ui-sref="posts" >Posts</a></li>
+				</ul>
+			</div>
+		</nav>
 
+		<!--<a class="nav-link" ui-sref="users" >Users</a>-->
 		<div ui-view></div>
-
-		<a ui-sref="posts" class="btn btn-default">Posts</a>
-		<a ui-sref="users" class="btn btn-default">Users</a>
-
+		
 	</div>
 
 </main>

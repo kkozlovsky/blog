@@ -9,9 +9,8 @@ angular.module('myApp', [
 	$stateProvider
 		.state('main', {
 			url: '/',
-			templateUrl: 'index.html',
-			controller: 'MainCtrl',
-			title: "Главная"
+			templateUrl: 'templates/posts.html',
+			controller: 'PostsCtrl',
 		})
 		.state('users', {
 			url: '/users',
